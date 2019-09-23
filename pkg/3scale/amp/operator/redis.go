@@ -11,8 +11,6 @@ import (
 func (o *OperatorRedisOptionsProvider) GetRedisOptions() (*component.RedisOptions, error) {
 	optProv := component.RedisOptionsBuilder{}
 
-	imageProvider := product.CurrentImageProvider()
-
 	optProv.AppLabel(*o.APIManagerSpec.AppLabel)
 	optProv.AMPRelease(product.ThreescaleRelease)
 	optProv.InsecureImportPolicy(*o.APIManagerSpec.ImageStreamTagImportInsecure)
@@ -20,13 +18,13 @@ func (o *OperatorRedisOptionsProvider) GetRedisOptions() (*component.RedisOption
 	if o.APIManagerSpec.Backend != nil && o.APIManagerSpec.Backend.RedisImage != nil {
 		optProv.BackendImage(*o.APIManagerSpec.Backend.RedisImage)
 	} else {
-		optProv.BackendImage(imageProvider.GetBackendRedisImage())
+		optProv.BackendImage(component.BackendRedisImageURL())
 	}
 
 	if o.APIManagerSpec.System != nil && o.APIManagerSpec.System.RedisImage != nil {
 		optProv.SystemImage(*o.APIManagerSpec.System.RedisImage)
 	} else {
-		optProv.SystemImage(imageProvider.GetSystemRedisImage())
+		optProv.SystemImage(component.SystemRedisImageURL())
 	}
 
 	o.setResourceRequirementsOptions(&optProv)
