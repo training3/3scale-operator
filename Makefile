@@ -73,7 +73,7 @@ test-crds:
 	
 ## verify-manifest: Test manifests have expected format
 verify-manifest:
-        operator-courier push deploy/olm-catalog/kogito-cloud-operator/ sbuveshkumar test-orator $(CIRCLE_TAG) "basic $(TOKEN)"
+	operator-courier push deploy/olm-catalog/kogito-cloud-operator/ sbuveshkumar test-orator $(CIRCLE_TAG) "basic $(TOKEN)"
 ifndef OPERATORCOURIER
 	$(error "operator-courier is not available please install pip3 install operator-courier")
 endif
