@@ -70,9 +70,10 @@ e2e: e2e-clean e2e-setup e2e-run
 ## test-crds: Run CRD unittests
 test-crds:
 	cd $(PROJECT_PATH)/test/crds && go test -v
-
+	
 ## verify-manifest: Test manifests have expected format
 verify-manifest:
+operator-courier push deploy/olm-catalog/kogito-cloud-operator/ sbuveshkumar test-orator $(CIRCLE_TAG) "basic $(TOKEN)"
 ifndef OPERATORCOURIER
 	$(error "operator-courier is not available please install pip3 install operator-courier")
 endif
